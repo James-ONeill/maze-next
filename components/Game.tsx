@@ -15,7 +15,7 @@ import Image from "next/image"
 import { useContext, useEffect, useMemo, useState } from "react"
 
 function Game() {
-  const [screen, setScreen] = useState<string>("start-game")
+  const [screen, setScreen] = useState<string>("game")
   const [latestTime, updateLatestTime] = useState(null)
   const [drink, updateDrink] = useState<
     "COF" | "TEA" | "CAP" | "LAT" | "ESP" | "CHO" | "MOC" | null
@@ -27,7 +27,7 @@ function Game() {
 
   const { footstepAudio, coffeeMachineAudio, themeAudio, endThemeAudio } =
     useMemo(() => {
-      if (!Audio) return {}
+      if (typeof Audio === "undefined") return {};
 
       const footstepAudio = new Audio("/audio/footsteps.wav")
       footstepAudio.load()
@@ -111,14 +111,6 @@ function Game() {
 
     setScreen("game")
   }
-
-  useEffect(() => {
-    try {
-      const name = localStorage.getItem("name")
-
-      if (typeof name === "string") setPlayer({ ...player, name })
-    } catch (e) {}
-  }, [player])
 
   function setName(name: string) {
     setPlayer({ ...player, name })
@@ -231,7 +223,7 @@ function Game() {
       endTime: null,
     })
 
-    setScreen("start-game")
+    setScreen("game")
   }
 
   return (

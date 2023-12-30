@@ -1,4 +1,6 @@
-import { useState, useMemo } from "react"
+"use client"
+
+import { useState, useRef } from "react"
 
 type Drink = "COF" | "TEA" | "CAP" | "LAT" | "ESP" | "CHO" | "MOC"
 
@@ -10,17 +12,18 @@ interface Props {
 function CoffeeMachineScreen({ updateDrink, onComplete }: Props) {
   const [dispensing, updateDispensing] = useState(false)
 
-  const pouringCoffeeAudio = useMemo(() => {
-    if (!Audio) return
-    return new Audio("/audio/pouring-coffee.wav")
-  }, [])
+  const pouringCoffeeAudio = useRef<HTMLAudioElement | undefined>(
+    typeof Audio !== "undefined"
+      ? new Audio("/audio/pouring-coffee.wav")
+      : undefined
+  )
 
   function chooseDrink(drink: Drink = "CAP") {
     updateDispensing(true)
     updateDrink(drink)
 
-    pouringCoffeeAudio?.play()
-    pouringCoffeeAudio?.addEventListener("ended", onComplete)
+    pouringCoffeeAudio.current?.play()
+    pouringCoffeeAudio.current?.addEventListener("ended", onComplete)
   }
 
   return (

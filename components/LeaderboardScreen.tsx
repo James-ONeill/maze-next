@@ -1,4 +1,6 @@
-import { useState, useEffect, useContext, useMemo } from "react"
+"use client"
+
+import { useState, useEffect, useContext, useRef } from "react"
 import ordinal from "ordinal"
 import { padStart } from "lodash"
 
@@ -13,20 +15,17 @@ function LeaderboardScreen({ latestTime, exit }: Props) {
   const [times, updateTimes] = useState([])
   const player = useContext(PlayerContext)
 
-  const theme = useMemo(() => {
-    if (!Audio) return
-    const theme = new Audio("/audio/themetune-end.mp3")
-    theme.loop = true
-    return theme
-  }, [])
+  const theme = useRef<HTMLAudioElement | undefined>(
+    typeof Audio !== "undefined"
+      ? new Audio("/audio/themetune-end.mp3")
+      : undefined
+  )
 
   useEffect(() => {
     if (!latestTime) return
 
-    theme?.play()
-
-    return () => theme?.pause()
-  }, [latestTime])
+    theme.current?.play()
+  }, [latestTime, theme])
 
   function textColor(index: number) {
     const colors = ["gold", "silver", "bronze"]

@@ -35,7 +35,8 @@ function NewPlayerScreen({ createPlayer, showLeaderboard }: Props) {
         className="nes-input mb-4 focus:outline-none"
         style={{ background: "white" }}
         placeholder="ENTER NAME..."
-        defaultValue={player.name}
+        defaultValue="PLAYER 1"
+        disabled
         type="text"
       />
 
