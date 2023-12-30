@@ -1,15 +1,16 @@
 import { createContext } from "react"
 
-type Direction = "up" | "down" | "left" | "right"
+export type Direction = "up" | "down" | "left" | "right"
 
-interface PlayerState {
+export interface PlayerState {
   name?: string
   x: number
   y: number
-  hasCoffee: boolean
-  direction?: "up" | "down" | "left" | "right"
+  hasCoffee?: boolean
+  direction?: Direction
   move?: (direction: Direction) => any
-  setName?: (name: string) => any
+  setName?: (name: string) => void
+  hasCompleted?: boolean
 }
 
 const PlayerContext = createContext<PlayerState>({
