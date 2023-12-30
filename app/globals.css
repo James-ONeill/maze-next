@@ -1,5 +1,75 @@
 @tailwind base;
 @tailwind components;
+
+input,
+textarea {
+  appearance: none;
+}
+
+.frame-border {
+  position: relative;
+  z-index: -1;
+}
+.frame-border::before {
+  content: "";
+  display: block;
+  position: fixed;
+  top: 6px;
+  bottom: 6px;
+  left: 6px;
+  right: 6px;
+  border: 6px solid #e04000;
+  z-index: 1;
+}
+
+.frame-border::after {
+  border: 6px solid #712c11;
+  bottom: 6px;
+  content: "";
+  display: block;
+  left: 6px;
+  position: fixed;
+  right: 6px;
+  top: 6px;
+  transform: translate(3px, 3px);
+  z-index: 0;
+}
+
+.maze {
+  background-image: url("/img/maze.jpg");
+  background-size: 100%;
+  display: grid;
+  grid-template-columns: repeat(16, 1.25rem);
+  grid-template-rows: repeat(16, 1.25rem);
+  width: fit-content;
+}
+
+.player {
+  align-items: center;
+  height: 1.25rem;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1.25rem;
+}
+
+.nes-input {
+  background-clip: padding-box;
+  background: white;
+  border-color: initial;
+  border-image-outset: 2;
+  border-image-repeat: stretch;
+  border-image-slice: 2;
+  border-image-source: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="5" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2 1 h1 v1 h-1 z M1 2 h1 v1 h-1 z M3 2 h1 v1 h-1 z M2 3 h1 v1 h-1 z" fill="rgb(89,62,36)" /></svg>');
+  border-image-width: 2;
+  border-style: solid;
+  border-width: 4px;
+  margin: 4px;
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+  width: 100%;
+}
+
 @tailwind utilities;
 
 :root {
@@ -16,12 +86,51 @@
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.text-shadow-white {
+  text-shadow: -2px 2px white;
+}
+
+.text-shadow-dark-orange {
+  text-shadow: 3px 3px #b12d00;
+}
+
+.text-shadow-dark-brown {
+  text-shadow: 3px 3px #230a00;
+}
+
+.shadow-button-dark {
+  box-shadow: 0 4px 0 #531500, -4px 0 0 #75321b, 4px 0 0 #531500,
+    0 -4px 0 #75321b;
+}
+
+.shadow-button-orange {
+  box-shadow: 0 4px 0 #b02c00, -4px 0 0 #f86b39, 4px 0 0 #b02c00,
+    0 -4px 0 #f86b39;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.controls .up {
+  grid-column: 2 / 2;
+}
+
+.controls .down {
+  grid-column: 2 / 2;
+  grid-row: 3 / 3;
+  margin-top: -15px;
+}
+
+.controls .left {
+  grid-column: 1 / 1;
+  grid-row: 2 / 2;
+  margin-top: -15px;
+}
+
+.controls .right {
+  grid-column: 3 / 3;
+  grid-row: 2 / 2;
+  margin-top: -15px;
 }
