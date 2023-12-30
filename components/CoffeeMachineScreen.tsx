@@ -10,17 +10,17 @@ interface Props {
 function CoffeeMachineScreen({ updateDrink, onComplete }: Props) {
   const [dispensing, updateDispensing] = useState(false)
 
-  // const pouringCoffeeAudio = useMemo(() => {
-  //   if (!Audio) return
-  //   return new Audio("/audio/pouring-coffee.wav")
-  // }, [])
+  const pouringCoffeeAudio = useMemo(() => {
+    if (!Audio) return
+    return new Audio("/audio/pouring-coffee.wav")
+  }, [])
 
   function chooseDrink(drink: Drink = "CAP") {
     updateDispensing(true)
     updateDrink(drink)
 
-    // pouringCoffeeAudio?.play()
-    // pouringCoffeeAudio?.addEventListener("ended", onComplete)
+    pouringCoffeeAudio?.play()
+    pouringCoffeeAudio?.addEventListener("ended", onComplete)
   }
 
   return (

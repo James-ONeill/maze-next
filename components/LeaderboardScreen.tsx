@@ -13,25 +13,25 @@ function LeaderboardScreen({ latestTime, exit }: Props) {
   const [times, updateTimes] = useState([])
   const player = useContext(PlayerContext)
 
-  // const theme = useMemo(() => {
-  //   if (! Audio) return;
-  //   const theme = new Audio("/audio/themetune-end.mp3")
-  //   theme.loop = true
-  //   return theme
-  // }, [])
+  const theme = useMemo(() => {
+    if (!Audio) return
+    const theme = new Audio("/audio/themetune-end.mp3")
+    theme.loop = true
+    return theme
+  }, [])
 
   useEffect(() => {
     if (!latestTime) return
 
-    // theme?.play()
+    theme?.play()
 
-    // return () => theme?.pause()
+    return () => theme?.pause()
   }, [latestTime])
 
-  // function textColor(index: number) {
-  //     const colors = ["gold", "silver", "bronze"];
-  //     return `text-${colors[index] || "brown-dark"}`;
-  // }
+  function textColor(index: number) {
+    const colors = ["gold", "silver", "bronze"]
+    return `text-${colors[index] || "brown-dark"}`
+  }
 
   return (
     <>
