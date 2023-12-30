@@ -1,10 +1,6 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext } from "react"
 import MazeContext from "./MazeContext"
 import TimerContext from "./TimerContext"
-
-const audio = new Audio("/audio/themetune-background-gameplay.mp3")
-audio.load()
-audio.loop = true
 
 function Maze() {
   const { tiles } = useContext(MazeContext)
