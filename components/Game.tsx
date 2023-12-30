@@ -25,33 +25,33 @@ function Game() {
     endTime: null,
   })
 
-  const { footstepAudio, coffeeMachineAudio, themeAudio, endThemeAudio } =
-    useMemo(() => {
-      if (!Audio) return {}
+  // const { footstepAudio, coffeeMachineAudio, themeAudio, endThemeAudio } =
+    // useMemo(() => {
+    //   if (!Audio) return {}
 
-      const footstepAudio = new Audio("/audio/footsteps.wav")
-      footstepAudio.load()
-      footstepAudio.addEventListener("ended", footstepAudio.load)
+    //   const footstepAudio = new Audio("/audio/footsteps.wav")
+    //   footstepAudio.load()
+    //   footstepAudio.addEventListener("ended", footstepAudio.load)
 
-      const coffeeMachineAudio = new Audio("/audio/reach-coffee-machine.wav")
-      coffeeMachineAudio.load()
-      coffeeMachineAudio.addEventListener("ended", coffeeMachineAudio.load)
+    //   const coffeeMachineAudio = new Audio("/audio/reach-coffee-machine.wav")
+    //   coffeeMachineAudio.load()
+    //   coffeeMachineAudio.addEventListener("ended", coffeeMachineAudio.load)
 
-      const themeAudio = new Audio("/audio/themetune-background-gameplay.mp3")
-      themeAudio.load()
-      themeAudio.loop = true
+    //   const themeAudio = new Audio("/audio/themetune-background-gameplay.mp3")
+    //   themeAudio.load()
+    //   themeAudio.loop = true
 
-      const endThemeAudio = new Audio("/audio/themetune-end.mp3")
-      endThemeAudio.load()
-      endThemeAudio.loop = true
+    //   const endThemeAudio = new Audio("/audio/themetune-end.mp3")
+    //   endThemeAudio.load()
+    //   endThemeAudio.loop = true
 
-      return {
-        footstepAudio,
-        coffeeMachineAudio,
-        themeAudio,
-        endThemeAudio,
-      }
-    }, [])
+    //   return {
+    //     footstepAudio,
+    //     coffeeMachineAudio,
+    //     themeAudio,
+    //     endThemeAudio,
+    //   }
+    // }, [])
 
   useEffect(() => {
     window.addEventListener("focus", () => {
@@ -60,15 +60,15 @@ function Game() {
       }
 
       if (screen === "leaderboard" && latestTime != null) {
-        endThemeAudio?.play()
+        // endThemeAudio?.play()
       }
     })
 
     window.addEventListener("blur", () => {
-      themeAudio?.pause()
-      endThemeAudio?.pause()
+      // themeAudio?.pause()
+      // endThemeAudio?.pause()
     })
-  }, [screen, latestTime, endThemeAudio, themeAudio])
+  }, [screen, latestTime, /*endThemeAudio, themeAudio*/])
 
   const maze = useContext(MazeContext)
 
@@ -87,7 +87,7 @@ function Game() {
 
   function startTimer() {
     if (timer.startTime) return
-    themeAudio?.play()
+    // themeAudio?.play()
 
     setTimer({
       ...timer,
@@ -97,7 +97,7 @@ function Game() {
   }
 
   function stopTimer() {
-    themeAudio?.pause()
+    // themeAudio?.pause()
     setTimer({
       ...timer,
       endTime: moment(),
@@ -163,7 +163,7 @@ function Game() {
       !maze.tiles[newPlayer.y][newPlayer.x] ||
       !maze.traversableTiles.includes(maze.tiles[newPlayer.y][newPlayer.x].type)
     ) {
-      footstepAudio?.play()
+      // footstepAudio?.play()
       setPlayer({ ...player, direction })
 
       return
@@ -173,7 +173,7 @@ function Game() {
       newPlayer.x == maze.coffeeMachine.x &&
       newPlayer.y == maze.coffeeMachine.y
     ) {
-      coffeeMachineAudio?.play()
+      // coffeeMachineAudio?.play()
       setScreen("coffee-machine")
       newPlayer.hasCoffee = true
       setPlayer({ ...newPlayer, direction: "down" })
@@ -187,8 +187,8 @@ function Game() {
       newPlayer.x == maze.checkout.x &&
       newPlayer.y == maze.checkout.y
     ) {
-      coffeeMachineAudio?.load()
-      coffeeMachineAudio?.play()
+      // coffeeMachineAudio?.load()
+      // coffeeMachineAudio?.play()
       setScreen("checkout")
       setPlayer({ ...newPlayer, direction })
       playerAnimating()
@@ -208,7 +208,7 @@ function Game() {
 
     playerAnimating()
 
-    footstepAudio?.play()
+    // footstepAudio?.play()
     setPlayer({ ...newPlayer, direction })
   }
 
@@ -217,7 +217,7 @@ function Game() {
   }, [player])
 
   function resetGame() {
-    endThemeAudio?.pause()
+    // endThemeAudio?.pause()
     setPlayer({
       ...player,
       x: maze.entrance.x,
