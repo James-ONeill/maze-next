@@ -44,7 +44,7 @@ function Timer() {
         style={{ width: "fit-content" }}
       >
         <div className="text-orange text-xs">TIME</div>
-        {elapsedTime()}
+        <span className="tabular-nums">{elapsedTime()}</span>
       </div>
     </>
   )
