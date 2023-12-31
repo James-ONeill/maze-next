@@ -8,9 +8,5 @@ const pressStart2P = Press_Start_2P({
 })
 
 export default function Home() {
-  return (
-    <div className={pressStart2P.className}>
-      <Game />
-    </div>
-  )
+  return <Game />
 }
